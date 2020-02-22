@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Google Search and Classify
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg">
+  
+    <button ion-button (click)="openGoogleApi()">Google Knowledge Api</button>
+    <button ion-button (click)="openClassify()">Classify Api</button>
+  
+  <div *ngIf="isGoogleApi">
+    <h3>Google Knowledge Api</h3>
+    <ion-item>
+      <ion-input [(ngModel)]="inputValue" placeholder="Insert text here" type="text"></ion-input>
+    </ion-item>
+    <button ion-button (click)="search()">Search</button>
+    <div *ngIf="googleResult">
+      <ion-list class = "balanced">
+        <span>
+          Name : {{googleResult.name}}
+        </span>
+        <br>
+        <span>
+          Description : {{googleResult.description}}
+        </span><br/>
+        <span>
+          {{googleResult.detailedDescription.articleBody}}
+        </span>
+      </ion-list>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isClassify">
+    <h3>Classify Api</h3>
+    <ion-item>
+      <ion-textarea [(ngModel)]="inputText" placeholder="Enter more information here..."></ion-textarea>
+    </ion-item>
+    <button ion-button (click)="classify()">Search</button>
+    <ion-list class = "balanced" *ngIf="classifyResult">
+      <span>
+        Positivity in given sentence : {{classifyResult.positive * 100 | number: '1.0-0'}}%
+      </span><br>
+      <span>
+        Negativity in given sentence : {{classifyResult.negative * 100 | number: '1.0-0'}}%
+      </span>
+    </ion-list>
+  </div>
+  
+</ion-content>

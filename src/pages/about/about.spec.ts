@@ -1,5 +1,5 @@
 import { async, TestBed } from '@angular/core/testing';
-import {NavController, AlertController, IonicModule} from 'ionic-angular';
+import {AlertController, IonicModule} from 'ionic-angular';
 import {AlertControllerMock, AlertMock} from 'ionic-mocks';
 
 
@@ -10,7 +10,6 @@ describe('About Page', () => {
   let fixture;
   let component;
   let alertCtrl: AlertController;
-  let navCtrl: NavController;
 
 
   beforeEach(async(() => {
@@ -20,7 +19,6 @@ describe('About Page', () => {
         IonicModule.forRoot(AboutPage)
       ],
       providers: [
-        NavController,
         { provide: AlertController, useClass: AlertControllerMock }
       ]
     })
@@ -32,31 +30,15 @@ describe('About Page', () => {
     alertCtrl = AlertControllerMock.instance();
   });
 
-  it('has to be created', () => {
+  it('should be created', () => {
     expect(component instanceof AboutPage).toBe(true);
   });
 
-  it('Please enter valid email address', () => {
+  it("sign up function", () =>{
 
-    let signup = new AboutPage(navCtrl, alertCtrl);
-    signup.firstName = 'Jai';
-    signup.lastName = 'Koya';
-    signup.password = 'abc';
-    signup.Signup();
+    let fun = new AboutPage(alertCtrl);
+    fun.Signup();
     expect(alertCtrl.create).toHaveBeenCalled();
-
-  });
-
-  it('Successful Signup', () => {
-
-    let signup = new AboutPage(navCtrl, alertCtrl);
-    signup.firstName = 'Jai';
-    signup.lastName = 'Koya';
-    signup.email = 'jai@umkc.edu';
-    signup.password = 'abc';
-    signup.Signup();
-    expect(alertCtrl.create).toHaveBeenCalled();
-
   });
 
 });
